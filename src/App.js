@@ -1,14 +1,37 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TodoForm from './Components/TodoForm';
 import TodoList from './Components/TodoList';
 import './stylesheet.css';
 
-function App() {
+const LOCAL_STORAGE_KEY = "react-todo-list-todos";
 
-  const [todos, setTodos] = useState([])
+function App() {
+  const [todos, setTodos] = useState(JSON.parse(window.localStorage.getItem(LOCAL_STORAGE_KEY)) || []);
+  
+  useEffect(() => {
+    const storageTodos = window.localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (storageTodos !== null) setTodos(JSON.parse(storageTodos));
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
+  }, [todos]);
 
   function addTodo(todo) {
     setTodos([todo, ...todos]);
+  }
+
+  function editTodo(newTodo) {
+    setTodos(
+      todos.map(todo => {
+        if (todo.id === newTodo.id) {
+          return {
+            ...newTodo
+          }
+        }
+        return todo;
+      })
+    )
   }
 
   function toggleComplete(id) {
@@ -32,13 +55,14 @@ function App() {
   return (
     <div className="App">
       <div className='content'>
-        <div className='title'>To Do List</div>
-        < TodoForm addTodo={addTodo}/>
+        <h1><span><strong>ToDo</strong> List</span></h1>
         < TodoList
           todos={todos}
           toggleComplete={toggleComplete}
           deleteTodo={deleteTodo}
+          editTodo={editTodo}
         />
+        < TodoForm addTodo={addTodo}/>
       </div>
     </div>
   );

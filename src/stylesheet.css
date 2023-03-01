@@ -1,29 +1,242 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
+
 body {
-  background-color: rgb(55, 50, 50);
+  font-family: 'Kanit', sans-serif;
+  background-color: #e4e6ed;
 }
 
 .App {
   display: flex;
+  width: 100%;
+  flex-direction: column;
   justify-content: center;
-  margin: 100px;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  margin: auto;
+  margin-top: 100px;
+  max-width: 800px;
 }
 
 .content {
   display: flex;
+  box-shadow: 7px 7px 0px 0px rgba(0,0,0,0.61);
+  font-family: 'Kanit', sans-serif;
   flex-direction: column;
-  background-color: grey;
+  padding-bottom: 50px;
+  overflow: auto;
+  border-radius: 3px;
+  border: 0.5px solid rgb(110, 108, 108);
+  background-color: white;
   justify-content: center;
   text-align: center;
-  width: 500px;
-  height: 500px;
+  width: 100%;
 }
 
-.title {
-  font-size: 75px;
-  padding: 50px;
+h1 {
+  overflow: hidden;
+  text-align: center;
+  font-size: 60px;
+  font-weight:lighter;
+  margin: 60px;
+}
+
+h1:before,
+h1:after {
+  background-color: #000;
+  content: "";
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 50%;
+}
+
+h1:before {
+  right: 0.5em;
+  margin-left: -50%;
+}
+
+h1:after {
+  left: 0.5em;
+  margin-right: -50%;
+}
+
+ul {
+  padding: 20px;
+  margin: 25px;
+  max-height: 500px;
+  overflow: auto;
 }
 
 .todo-items {
   display: flex;
+  justify-content: center;
+}
+
+.buttons {
+  display: flex;
+}
+
+.form-control {
+  font-size: 1.5rem;
+  font-weight: bold;
+  line-height: 1.1;
+  display: grid;
+  grid-template-columns: 1em auto;
+  gap: 0.5em;
+}
+
+input[type='checkbox'] {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #fff;
+  margin: 0;
+  color: #1B567A;
+  font: inherit;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid #1B567A;
+  border-radius: 0.5em;
+  transform: translateY(-0.075em);
+  display: grid;
+  place-content: center;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  width: 1em;
+  height: 1em;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--form-control-color);
+  background-color: CanvasText;
+  transform-origin: bottom left;
+  clip-path: polygon(10% 56%, 45% 97%, 92% 11%, 80% 8%, 43% 76%, 16% 49%);
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+.form-control {
+  margin-top: 1em;
+}
+
+input[name=task-input] {
+  font-family: 'Kanit', sans-serif;
+  font-size: 25px;
+  padding: 10px;
+  margin: 10px;
+  width: 100%;
+  border:0;
+  background-color: rgb(251, 247, 247);
+}
+
+input[name=task-input]:focus {
+  border-bottom: 2px solid black;
+} 
+
+input[name=add-input] {
+  font-family: 'Kanit', sans-serif;
+  font-size: 30px;
+  padding: 10px;
+  margin: 15px;
+  width: 70%;
+  border: 0;
+  border-bottom: 1px solid black;
+  background-color: white;
+  vertical-align: middle;
+}
+
+.delete-icon {
+  transform: scale(1.5)
+}
+
+.edit-icon {
+  transform: scale(1.5);
+}
+
+.save-icon {
+  transform: scale(1.5)
+}
+
+.add-icon {
+  transform: scale(2.5);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #bdc8d0;
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 500px) {
+  body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+  }
+
+  .App {
+    margin: 0;
+    height: 100%;
+  }
+
+  .content {
+    display: block;
+    padding: 0;
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+    height: 100vh;
+  }
+
+  .form-control {
+    font-size: 1.2rem;
+    padding-left: 5px;
+  }
+
+  h1 {
+    font-size: 40px;
+    margin: 50px 25px;
+    border-radius: 0;
+  }
+
+  ul {
+    padding: 0;
+    max-height: 60%;
+    overflow: auto;
+  }
+
+  .delete-icon {
+    transform: scale(1.0)
+  }
+  
+  .edit-icon {
+    transform: scale(1.0);
+  }
+
+  .save-icon {
+    transform: scale(1.0);
+  }
+  
+  .add-icon {
+    transform: scale(2.0);
+  }
+
+  input[name=task-input] {
+    font-size: 15px;
+  }
+
+  input[name=add-input] {
+    font-size: 17px;
+  }
 }
